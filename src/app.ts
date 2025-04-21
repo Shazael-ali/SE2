@@ -1,4 +1,4 @@
-import { FinanceCalculater, OrderManagment, Validator } from "app-clean";
+import { FinanceCalculater, ItemValidator, MaxPriceValidator, OrderManagment, PriceValidator, Validator } from "app-clean";
 const orders = [
     { id: 1, item: "Sponge", price: 15 },
     { id: 2, item: "Chocolate", price: 20 },
@@ -6,8 +6,14 @@ const orders = [
     { id: 4, item: "Red Velvet", price: 25 },
     { id: 5, item: "Coffee", price: 8 },
   ];
+
+const rules =  [
+    new ItemValidator(),
+    new PriceValidator(),
+    new MaxPriceValidator()
+];
   
-const orderManager = new OrderManagment();
+const orderManager = new OrderManagment(new Validator(rules), new FinanceCalculater);
 
 for (const order of orders){
     orderManager.addOrder(order.item,order.price)
@@ -20,10 +26,10 @@ orderManager.addOrder(newItem,newPrice)
 console.log("Order after adding a new order:", orderManager.getOrders())
 
 // Calculate Total Revenue directly
-  console.log("Total Revenue:", FinanceCalculater.getRevenue(orders));
+  console.log("Total Revenue:", orderManager.getTotalRevenue());
   
 // Calculate Average Buy Power directly
-  console.log("Average Buy Power:", FinanceCalculater.getAverageBuyPower(orders));
+  console.log("Average Buy Power:", orderManager.getAverageBuyPower());
   
   // Fetching an order directly
   const fetchId = 2;
