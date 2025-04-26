@@ -7,7 +7,13 @@ const config : Config.InitialOptions = {
     testMatch: ['**/*.test.ts'],
     collectCoverage:true,
     collectCoverageFrom:['src/**/*.ts'],
-    coverageDirectory: 'coverage'
+    coverageDirectory: 'coverage',
+    coverageThreshold:{
+        global:{
+            functions:100,
+            statements:100
+        }
+    }
 
 }
 
