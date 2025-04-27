@@ -1,4 +1,4 @@
-import logger from "./looger"
+import logger from "../looger"
 import{promises as fs} from 'fs';
 import { parse as csvParse } from 'csv-parse';
 import { stringify as csvStringify } from 'csv-stringify';
