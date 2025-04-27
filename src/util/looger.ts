@@ -37,7 +37,7 @@ transports:[
     //kel ma a3mel log wrjini ye bl console
    // new winston.transports.Console({format:logConsoleFormat}),
     new winston.transports.File({filename:'logs/error.log',level:'error',format:logFileFormat,dirname:logsDir}),
-    new winston.transports.File({filename:'logs/all.log',format:logFileFormat, dirname:logsDir}),
+    new winston.transports.File({filename:'logs/testtsftwyfvwhv.log',format:logFileFormat, dirname:logsDir}),
 ],
 exceptionHandlers:[
     new winston.transports.File({filename:'logs/exception.log',format:logFileFormat,dirname:logsDir}),
