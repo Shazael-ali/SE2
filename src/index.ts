@@ -1,42 +1,26 @@
-import { FinanceCalculater, ItemValidator, MaxPriceValidator, OrderManagment, PriceValidator, Validator } from "./app";
+import { readJsonFile, writeJsonFile } from "./util/parsers/jsonParser";
 import logger from "./util/looger";
-const orders = [
-    { id: 1, item: "Sponge", price: 15 },
-    { id: 2, item: "Chocolate", price: 20 },
-    { id: 3, item: "Fruit", price: 18 },
-    { id: 4, item: "Red Velvet", price: 25 },
-    { id: 5, item: "Coffee", price: 8 },
-  ];
+import {readCSVFile} from './util/parsers/parser';
+import { parseXMLFile } from "./util/parsers/xmlParser";
 
-const rules =  [
-    new PriceValidator(),
-    new MaxPriceValidator()
-];
-  
-const orderManager = new OrderManagment(new Validator(rules), new FinanceCalculater);
 
-for (const order of orders){
-    orderManager.addOrder(order.item,order.price)
+async function main(){
+    const data = await readCSVFile('src/data/cake orders.csv');
+    // for each data row , log the row
+   data.forEach((row)=> logger.info(row))
+    
+    const jsonData = await readJsonFile('src/data/book orders.json');
+    jsonData.forEach((jsonRow)=> logger.info(JSON.stringify(jsonRow, null,0)));
+
+    const addjsonData = {"Order ID":"123","Book Title":"Shadows and Secrets","Author":"Agatha Christie","Genre":"Horror","Format":"Hardcover","Language":"English","Publisher":"Penguin Random House","Special Edition":"Illustrated Edition","Packaging":"Luxury Box","Price":"33","Quantity":"2"};
+    const newJsonData = [...jsonData, addjsonData];
+    await writeJsonFile('src/data/book orders.json', newJsonData);
+
+    const readXML = await parseXMLFile('src/data/toy orders.xml');
+
+    jsonData.forEach((jsonRow)=> logger.info(JSON.stringify(readXML,null,1)));
+   
 }
 
-const newItem = "Marble";
-const newPrice = 22;
-orderManager.addOrder(newItem,newPrice)
 
-logger.info("Order after adding a new order: %o" , orderManager.getOrders())
-
-// Calculate Total Revenue directly
-  logger.info("Total Revenue:"+ orderManager.getTotalRevenue());
-  
-// Calculate Average Buy Power directly
-  logger.info("Average Buy Power:"+ orderManager.getAverageBuyPower());
-
-  // Fetching an order directly
-  const fetchId = 1;
-  const fetchedOrder = orderManager.getOrder(fetchId)
-  logger.info("Order with ID 2: %o " , fetchedOrder);
-  
-  // Attempt to fetch a non-existent order
-  const nonExistentId = 10;
-  const nonExistentOrder = orderManager.orderIsExist(nonExistentId)
-  logger.info("Order with ID 10 (non-existent):"+ nonExistentOrder);
+main();
