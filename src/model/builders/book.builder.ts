@@ -1,0 +1,109 @@
+import { Book } from "../Book.model";
+import logger from "../../util/looger";
+
+export class  BookBuilder{
+
+    private id!: string;
+    private bookTitle!: string;
+    private author!: string;
+    private genre!: string;
+    private format!: string;
+    private language!: string;
+    private publisher!: string;
+    private specialEdition!: string;
+    private packaging!: string;
+    private price!: number;
+    private quantity!: number;
+
+    public setId(id: string): BookBuilder {
+        this.id = id;
+        return this;
+    }
+
+    public setBookTitle(bookTitle: string): BookBuilder {
+        this.bookTitle = bookTitle;
+        return this;
+    }
+
+    public setAuthor(author: string): BookBuilder {
+        this.author = author;
+        return this;
+    }
+
+    public setGenre(genre: string): BookBuilder {
+        this.genre = genre;
+        return this;
+    }
+
+    public setFormat(format: string): BookBuilder {
+        this.format = format;
+        return this;
+    }
+
+    public setLanguage(language: string): BookBuilder {
+        this.language = language;
+        return this;
+    }
+
+    public setPublisher(publisher: string): BookBuilder {
+        this.publisher = publisher;
+        return this;
+    }
+
+    public setSpecialEdition(specialEdition: string): BookBuilder {
+        this.specialEdition = specialEdition;
+        return this;
+    }
+
+    public setPackaging(packaging: string): BookBuilder {
+        this.packaging = packaging;
+        return this;
+    }
+
+    public setPrice(price: number): BookBuilder {
+        this.price = price;
+        return this;
+    }
+
+    public setQuantity(quantity: number): BookBuilder {
+        this.quantity = quantity;
+        return this;
+    }
+
+
+    build(): Book {
+        const requiredFields = [
+            this.id,
+            this.bookTitle,
+            this.author,
+            this.genre,
+            this.format,
+            this.language,
+            this.publisher,
+            this.specialEdition,
+            this.packaging,
+            this.price,
+            this.quantity
+        ];
+
+        if (!requiredFields) {
+            throw new Error("All fields must be set before building the Book object.");
+        }
+
+        return new Book(
+            this.id,
+            this.bookTitle,
+            this.author,
+            this.genre,
+            this.format,
+            this.language,
+            this.publisher,
+            this.specialEdition,
+            this.packaging,
+            this.price,
+            this.quantity
+        );
+
+    }
+
+}
