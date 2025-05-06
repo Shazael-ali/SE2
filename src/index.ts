@@ -1,24 +1,53 @@
-import { readJsonFile, writeJsonFile } from "./util/parsers/jsonParser";
-import logger from "./util/looger";
-import {readCSVFile} from './util/parsers/parser';
-import { parseXMLFile } from "./util/parsers/xmlParser";
-
+import { ToyBuilder } from "./model/builders/toy.builder";
+import { BookBuilder } from "./model/builders/book.builder";
+import { CakeBuilder } from "./model/builders/cake.builder";
 
 async function main(){
-    const data = await readCSVFile('src/data/cake orders.csv');
-    // for each data row , log the row
-   data.forEach((row)=> logger.info(row))
-    
-    const jsonData = await readJsonFile('src/data/book orders.json');
-    jsonData.forEach((jsonRow)=> logger.info(JSON.stringify(jsonRow, null,0)));
+   const cakeBuilder = new CakeBuilder();
+   const cake =cakeBuilder.setId("1")
+   .setType("Birthday") 
+   .setFlavor("Chocolate")
+   .setFilling("Vanilla")
+   .setSize(10)
+   .setLayers(2)
+   .setDecorationColor("Red")
+   .setFrostingType("Buttercream")
+   .setFrostingFlavor("Vanilla")
+   .setDecorationType("Sprinkles")
+   .setCustomMessage("Happy Birthday")
+   .setShape("Round")
+   .setAllergies("Nuts")
+   .setSpecialIngredients("None")
+   .setPackagingType("Box")
+   .setPrice(29.99)
+   .setQuantity(1)
+   .build();
 
-    const addjsonData = {"Order ID":"123","Book Title":"Shadows and Secrets","Author":"Agatha Christie","Genre":"Horror","Format":"Hardcover","Language":"English","Publisher":"Penguin Random House","Special Edition":"Illustrated Edition","Packaging":"Luxury Box","Price":"33","Quantity":"2"};
-    const newJsonData = [...jsonData, addjsonData];
-    await writeJsonFile('src/data/book orders.json', newJsonData);
+   const bookBuilder = new BookBuilder();
+   const book = bookBuilder.setId('1')
+   .setBookTitle("The Great Gatsby")
+   .setAuthor("F. Scott Fitzgerald")
+   .setGenre("Fiction")
+   .setFormat("Hardcover")
+   .setLanguage("English")
+   .setPublisher("Scribner")
+   .setSpecialEdition("None")
+   .setPackaging("Box")
+   .setPrice(19.99)
+   .setQuantity(1)
+   .build();  
 
-    const readXML = await parseXMLFile('src/data/toy orders.xml');
+   const toyBuilder = new ToyBuilder();
+   const toy = toyBuilder.setId("1").setAgeGroup("3-5")
+   .setType("Action Figure").setBrand("LEGO")
+   .setMaterial("Plastic").setBatteryRequired(false).setEducational(true).setPrice(15.99).setQuantity(1)
+   .build()
 
-    jsonData.forEach((jsonRow)=> logger.info(JSON.stringify(readXML,null,1)));
+   console.log(cake);
+   console.log(book);
+   console.log(toy);
+   console.log("Cake ID: ", cake.getId());
+
    
 }
 
