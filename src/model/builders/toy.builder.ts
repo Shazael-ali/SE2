@@ -11,8 +11,7 @@ export class ToyBuilder {
     private material!: string;
     private batteryRequired!: boolean;
     private educational!: boolean;
-    private price!: number;
-    private quantity!: number;
+
 
     public setId(id: string): ToyBuilder {
         this.id = id;
@@ -49,15 +48,7 @@ export class ToyBuilder {
         return this;
     }
 
-    public setPrice(price: number): ToyBuilder {
-        this.price = price;
-        return this;
-    }
 
-    public setQuantity(quantity: number): ToyBuilder {
-        this.quantity = quantity;
-        return this;
-    }
 
     build(): Toy {
         const requiredFields = [
@@ -68,8 +59,7 @@ export class ToyBuilder {
             this.material,
             this.batteryRequired,
             this.educational,
-            this.price,
-            this.quantity
+    
         ];
 
         if (!requiredFields) {
@@ -84,8 +74,7 @@ export class ToyBuilder {
             this.material,
             this.batteryRequired,
             this.educational,
-            this.price,
-            this.quantity
+     
         )
     }
 }

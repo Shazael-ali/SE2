@@ -12,8 +12,7 @@ export class  BookBuilder{
     private publisher!: string;
     private specialEdition!: string;
     private packaging!: string;
-    private price!: number;
-    private quantity!: number;
+
 
     public setId(id: string): BookBuilder {
         this.id = id;
@@ -60,16 +59,6 @@ export class  BookBuilder{
         return this;
     }
 
-    public setPrice(price: number): BookBuilder {
-        this.price = price;
-        return this;
-    }
-
-    public setQuantity(quantity: number): BookBuilder {
-        this.quantity = quantity;
-        return this;
-    }
-
 
     build(): Book {
         const requiredFields = [
@@ -82,8 +71,7 @@ export class  BookBuilder{
             this.publisher,
             this.specialEdition,
             this.packaging,
-            this.price,
-            this.quantity
+
         ];
 
         if (!requiredFields) {
@@ -100,8 +88,7 @@ export class  BookBuilder{
             this.publisher,
             this.specialEdition,
             this.packaging,
-            this.price,
-            this.quantity
+
         );
 
     }

@@ -21,8 +21,7 @@ export class Cake implements Item {
     private allergies: string;
     private specialIngredients: string;
     private packagingType: string;
-    private price: number;
-    private quantity: number;
+
 
     constructor(
         id: string,
@@ -40,8 +39,7 @@ export class Cake implements Item {
         allergies: string,
         specialIngredients: string,
         packagingType: string,
-        price: number,
-        quantity: number
+   
     ) {
         this.id = id;
         this.type = type;
@@ -58,8 +56,7 @@ export class Cake implements Item {
         this.allergies = allergies;
         this.specialIngredients = specialIngredients;
         this.packagingType = packagingType;
-        this.price = price;
-        this.quantity = quantity;
+
     }
 
     getId(): string { return this.id; }
@@ -77,8 +74,7 @@ export class Cake implements Item {
     getAllergies(): string { return this.allergies; }
     getSpecialIngredients(): string { return this.specialIngredients; }
     getPackagingType(): string { return this.packagingType; }
-    getPrice(): number { return this.price; }
-    getQuantity(): number { return this.quantity; }
+
 }
 
 
