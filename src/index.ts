@@ -19,8 +19,7 @@ async function main(){
    .setAllergies("Nuts")
    .setSpecialIngredients("None")
    .setPackagingType("Box")
-   .setPrice(29.99)
-   .setQuantity(1)
+
    .build();
 
    const bookBuilder = new BookBuilder();
@@ -33,14 +32,13 @@ async function main(){
    .setPublisher("Scribner")
    .setSpecialEdition("None")
    .setPackaging("Box")
-   .setPrice(19.99)
-   .setQuantity(1)
+
    .build();  
 
    const toyBuilder = new ToyBuilder();
    const toy = toyBuilder.setId("1").setAgeGroup("3-5")
    .setType("Action Figure").setBrand("LEGO")
-   .setMaterial("Plastic").setBatteryRequired(false).setEducational(true).setPrice(15.99).setQuantity(1)
+   .setMaterial("Plastic").setBatteryRequired(false).setEducational(true)
    .build()
 
    console.log(cake);

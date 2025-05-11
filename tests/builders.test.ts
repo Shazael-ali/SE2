@@ -25,8 +25,6 @@ describe('ToyBuilder', () => {
             .setLanguage('English')
             .setSpecialEdition('First Edition')
             .setPackaging('Standard')
-            .setPrice(10.99)
-            .setQuantity(100)
             .build();
 
             expect(book.getId()).toBe('B001');
@@ -49,8 +47,7 @@ describe('ToyBuilder', () => {
             .setAllergies('None')
             .setSpecialIngredients('Sprinkles')
             .setPackagingType('Box')
-            .setPrice(49.99)
-            .setQuantity(5)
+           
             .build();
 
         expect(cake.getId()).toBe('C001');
@@ -68,8 +65,7 @@ describe('ToyBuilder', () => {
         expect(cake.getAllergies()).toBe('None');
         expect(cake.getSpecialIngredients()).toBe('Sprinkles');
         expect(cake.getPackagingType()).toBe('Box');
-        expect(cake.getPrice()).toBe(49.99);
-        expect(cake.getQuantity()).toBe(5);
+        
     });
 
     test('should throw error when building cake with missing property', () => {
@@ -92,8 +88,7 @@ describe('ToyBuilder', () => {
             .setMaterial('Plastic')
             .setBatteryRequired(true)
             .setEducational(true)
-            .setPrice(29.99)
-            .setQuantity(10)
+           
             .build();
 
             
@@ -105,8 +100,7 @@ describe('ToyBuilder', () => {
         expect(toy.getMaterial()).toBe('Plastic');
         expect(toy.getBatteryRequired()).toBe(true);
         expect(toy.getEducational()).toBe(true);
-        expect(toy.getPrice()).toBe(29.99);
-        expect(toy.getQuantity()).toBe(10);
+       
     });
 
     test('should throw error when building toy with missing property', () => {

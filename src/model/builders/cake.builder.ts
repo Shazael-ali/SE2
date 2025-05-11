@@ -18,8 +18,7 @@ import logger from "../../util/looger";
     private allergies!: string;
     private specialIngredients!: string;
     private packagingType!: string;
-    private price!: number;
-    private quantity!: number;
+
 ;
 
 
@@ -98,15 +97,6 @@ import logger from "../../util/looger";
         return this;
     }
 
-    public setPrice(price: number): CakeBuilder {
-        this.price = price;
-        return this;
-    }
-
-    public setQuantity(quantity: number): CakeBuilder {
-        this.quantity = quantity;
-        return this;
-    }
 
     build():Cake {
         const requiredFields = [
@@ -125,8 +115,7 @@ import logger from "../../util/looger";
             this.allergies,
             this.specialIngredients,
             this.packagingType,
-            this.price,
-            this.quantity
+     
         ];
         for (const property of requiredFields) {   
             if (!property) {
@@ -149,9 +138,7 @@ import logger from "../../util/looger";
             this.shape,
             this.allergies,
             this.specialIngredients,
-            this.packagingType,
-            this.price,
-            this.quantity
+            this.packagingType
 
         );
     }
