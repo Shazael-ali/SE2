@@ -1,10 +1,10 @@
 
 import { readCSVFile } from "./util/parsers/parser";
-import { CSVCakeMapper } from "./mappers/Cake.mapper";
+import { CSVCakeMapper } from "./mappers/CakeMapper";
 import logger from "./util/looger";
-import { CSVOrderMapper, XMLOrderMapper } from "./mappers/OrderMapper";
+import { CSVOrderMapper } from "./mappers/OrderMapper";
 import { readJsonFile } from "./util/parsers/jsonParser";
-import { JSONBookMapper } from "./mappers/book.mapper";
+import { JSONBookMapper } from "./mappers/BookMapper";
 import { parseXMLFile } from "./util/parsers/xmlParser";
 import { XMLToyMapper } from "./mappers/toy.mapper";
 
@@ -37,6 +37,6 @@ async function ToyMapper(){
     logger.info("List of orders: \n %o", orders);
 
 }
-main();
-BookMapper();
-ToyMapper();
+// main();
+ BookMapper();
+// ToyMapper();

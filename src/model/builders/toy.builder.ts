@@ -18,6 +18,9 @@ export class ToyBuilder {
         this.id = id;
         return this;
     }
+    public static newBuilder(): ToyBuilder {
+        return new ToyBuilder();
+    }
 
     public setType(type: string): ToyBuilder {
         this.type = type;

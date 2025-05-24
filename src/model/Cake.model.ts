@@ -1,12 +1,12 @@
-import { Item, ItemCategory } from "./Item.model";
+import { IItem, ItemCategory } from "./IItem";
 
 
 
-export class Cake implements Item {
+export class Cake implements IItem {
     getCategory(): ItemCategory {
        return ItemCategory.CAKE;
     }
-    private id: string;
+   
     private type: string;
     private flavor: string;
     private filling: string;
@@ -21,11 +21,10 @@ export class Cake implements Item {
     private allergies: string;
     private specialIngredients: string;
     private packagingType: string;
-    private price: number;
-    private quantity: number;
+
 
     constructor(
-        id: string,
+       
         type: string,
         flavor: string,
         filling: string,
@@ -40,10 +39,9 @@ export class Cake implements Item {
         allergies: string,
         specialIngredients: string,
         packagingType: string,
-        price: number,
-        quantity: number
+     
     ) {
-        this.id = id;
+       
         this.type = type;
         this.flavor = flavor;
         this.filling = filling;
@@ -58,11 +56,10 @@ export class Cake implements Item {
         this.allergies = allergies;
         this.specialIngredients = specialIngredients;
         this.packagingType = packagingType;
-        this.price = price;
-        this.quantity = quantity;
+       
     }
 
-    getId(): string { return this.id; }
+ 
     getType(): string { return this.type; }
     getFlavor(): string { return this.flavor; }
     getFilling(): string { return this.filling; }
@@ -77,8 +74,7 @@ export class Cake implements Item {
     getAllergies(): string { return this.allergies; }
     getSpecialIngredients(): string { return this.specialIngredients; }
     getPackagingType(): string { return this.packagingType; }
-    getPrice(): number { return this.price; }
-    getQuantity(): number { return this.quantity; }
+
 }
 
 

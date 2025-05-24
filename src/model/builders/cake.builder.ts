@@ -3,7 +3,7 @@ import logger from "../../util/looger";
 
  export class CakeBuilder {
     
-    private id!: string;
+   
     private type!: string;
     private flavor!: string;
     private filling!: string;
@@ -13,20 +13,18 @@ import logger from "../../util/looger";
     private frostingFlavor!: string;
     private decorationType!: string;
     private decorationColor!: string;
-    private customMessage!: string;
+    private customMessage?: string;
     private shape!: string;
     private allergies!: string;
     private specialIngredients!: string;
     private packagingType!: string;
-    private price!: number;
-    private quantity!: number;
+
 ;
 
 
-    public setId(id: string): CakeBuilder {
-        this.id = id;
-        return this;
-    }
+  public static newBuilder(): CakeBuilder {
+        return new CakeBuilder();
+  } 
 
     public setType(type: string): CakeBuilder {
         this.type = type;
@@ -98,19 +96,11 @@ import logger from "../../util/looger";
         return this;
     }
 
-    public setPrice(price: number): CakeBuilder {
-        this.price = price;
-        return this;
-    }
 
-    public setQuantity(quantity: number): CakeBuilder {
-        this.quantity = quantity;
-        return this;
-    }
 
     build():Cake {
         const requiredFields = [
-            this.id,
+           
             this.type,
             this.flavor,
             this.filling,
@@ -120,13 +110,12 @@ import logger from "../../util/looger";
             this.frostingFlavor,
             this.decorationType,
             this.decorationColor,
-            this.customMessage,
+          
             this.shape,
             this.allergies,
             this.specialIngredients,
             this.packagingType,
-            this.price,
-            this.quantity
+          
         ];
         for (const property of requiredFields) {   
             if (!property) {
@@ -135,7 +124,7 @@ import logger from "../../util/looger";
             }
          }
         return new Cake(
-            this.id,
+          
             this.type,
             this.flavor,
             this.filling,
@@ -145,13 +134,12 @@ import logger from "../../util/looger";
             this.frostingFlavor,
             this.decorationType,
             this.decorationColor,
-            this.customMessage,
+            this.customMessage || '',
             this.shape,
             this.allergies,
             this.specialIngredients,
             this.packagingType,
-            this.price,
-            this.quantity
+            
 
         );
     }

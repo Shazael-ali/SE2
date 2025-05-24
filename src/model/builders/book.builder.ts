@@ -3,7 +3,7 @@ import logger from "../../util/looger";
 
 export class  BookBuilder{
 
-    private id!: string;
+    
     private bookTitle!: string;
     private author!: string;
     private genre!: string;
@@ -12,12 +12,11 @@ export class  BookBuilder{
     private publisher!: string;
     private specialEdition!: string;
     private packaging!: string;
-    private price!: number;
-    private quantity!: number;
 
-    public setId(id: string): BookBuilder {
-        this.id = id;
-        return this;
+
+
+    public static newBuilder(): BookBuilder {
+        return new BookBuilder();
     }
 
     public setBookTitle(bookTitle: string): BookBuilder {
@@ -60,20 +59,11 @@ export class  BookBuilder{
         return this;
     }
 
-    public setPrice(price: number): BookBuilder {
-        this.price = price;
-        return this;
-    }
-
-    public setQuantity(quantity: number): BookBuilder {
-        this.quantity = quantity;
-        return this;
-    }
 
 
     build(): Book {
         const requiredFields = [
-            this.id,
+            
             this.bookTitle,
             this.author,
             this.genre,
@@ -82,8 +72,7 @@ export class  BookBuilder{
             this.publisher,
             this.specialEdition,
             this.packaging,
-            this.price,
-            this.quantity
+    
         ];
 
         if (!requiredFields) {
@@ -91,7 +80,7 @@ export class  BookBuilder{
         }
 
         return new Book(
-            this.id,
+          
             this.bookTitle,
             this.author,
             this.genre,
@@ -100,8 +89,7 @@ export class  BookBuilder{
             this.publisher,
             this.specialEdition,
             this.packaging,
-            this.price,
-            this.quantity
+          
         );
 
     }

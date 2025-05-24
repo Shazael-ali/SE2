@@ -8,14 +8,12 @@ export class CSVOrderMapper implements IMapper<string[] | {},IOrder> {
     constructor(private itemMapper: IMapper<string[], IItem>) {
     }
     map(data: string[] | {}): IOrder {
-        // const dataLength = data.length;
-        const objectValues = Object.values(data);
-       
-         const item : IItem = this.itemMapper.map(objectValues)
-         return  OrderBuilder.OrderBuilder()
-                              .setId(parseInt(objectValues[0]))
-                              .setQuantity(parseInt(objectValues[objectValues.length- 1]))
-                              .setPrice(parseInt(objectValues[objectValues.length - 2]))
+        const parsingObject = Object.values(data);
+         const item : IItem = this.itemMapper.map(parsingObject)
+         return  OrderBuilder.newBuilder()
+                              .setId(parsingObject[0])
+                              .setQuantity(parseInt(parsingObject[parsingObject.length- 1]))
+                              .setPrice(parseInt(parsingObject[parsingObject.length - 2]))
                               .setItem(item)
                               .build();
     }
@@ -23,32 +21,3 @@ export class CSVOrderMapper implements IMapper<string[] | {},IOrder> {
 
 }
 
-export class JSONOrderMapper implements IMapper<{} | [], IOrder> {
-    constructor(private itemMapper: IMapper<{} | [], IItem>) {
-    }
-    map(data: {} | []): IOrder {
-        const objectValues = Object.values(data);
-        const item: IItem = this.itemMapper.map(objectValues);
-        return OrderBuilder.OrderBuilder()
-                            .setId(objectValues[0])
-                            .setQuantity(parseInt(objectValues[objectValues.length - 1]))
-                            .setPrice(parseInt(objectValues[objectValues.length - 2]))
-                            .setItem(item)
-                            .build()
-    }
-}
-
-export class XMLOrderMapper implements IMapper<{} | [], IOrder> {
-    constructor(private itemMapper: IMapper<{} | [], IItem>) {
-    }
-    map(data: {} | []): IOrder {
-        const objectValues = Object.values(data);
-        const item: IItem = this.itemMapper.map(objectValues);
-        return OrderBuilder.OrderBuilder()
-                            .setId(objectValues[0])
-                            .setQuantity(parseInt(objectValues[objectValues.length - 1]))
-                            .setPrice(parseInt(objectValues[objectValues.length - 2]))
-                            .setItem(item)
-                            .build()
-    }
-}
