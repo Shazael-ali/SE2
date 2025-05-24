@@ -1,55 +1,42 @@
-import { ToyBuilder } from "./model/builders/toy.builder";
-import { BookBuilder } from "./model/builders/book.builder";
-import { CakeBuilder } from "./model/builders/cake.builder";
 
-async function main(){
-   const cakeBuilder = new CakeBuilder();
-   const cake =cakeBuilder.setId("1")
-   .setType("Birthday") 
-   .setFlavor("Chocolate")
-   .setFilling("Vanilla")
-   .setSize(10)
-   .setLayers(2)
-   .setDecorationColor("Red")
-   .setFrostingType("Buttercream")
-   .setFrostingFlavor("Vanilla")
-   .setDecorationType("Sprinkles")
-   .setCustomMessage("Happy Birthday")
-   .setShape("Round")
-   .setAllergies("Nuts")
-   .setSpecialIngredients("None")
-   .setPackagingType("Box")
-   .setPrice(29.99)
-   .setQuantity(1)
-   .build();
+import { readCSVFile } from "./util/parsers/parser";
+import { CSVCakeMapper } from "./mappers/Cake.mapper";
+import logger from "./util/looger";
+import { CSVOrderMapper, XMLOrderMapper } from "./mappers/OrderMapper";
+import { readJsonFile } from "./util/parsers/jsonParser";
+import { JSONBookMapper } from "./mappers/book.mapper";
+import { parseXMLFile } from "./util/parsers/xmlParser";
+import { XMLToyMapper } from "./mappers/toy.mapper";
 
-   const bookBuilder = new BookBuilder();
-   const book = bookBuilder.setId('1')
-   .setBookTitle("The Great Gatsby")
-   .setAuthor("F. Scott Fitzgerald")
-   .setGenre("Fiction")
-   .setFormat("Hardcover")
-   .setLanguage("English")
-   .setPublisher("Scribner")
-   .setSpecialEdition("None")
-   .setPackaging("Box")
-   .setPrice(19.99)
-   .setQuantity(1)
-   .build();  
 
-   const toyBuilder = new ToyBuilder();
-   const toy = toyBuilder.setId("1").setAgeGroup("3-5")
-   .setType("Action Figure").setBrand("LEGO")
-   .setMaterial("Plastic").setBatteryRequired(false).setEducational(true).setPrice(15.99).setQuantity(1)
-   .build()
+async function main() {
+   const data = await readCSVFile('src/data/cake orders.csv');
+   const cakeMapper = new CSVCakeMapper();
+    const orderMapper = new CSVOrderMapper(cakeMapper);
+    const cakes= data.map((row)=>orderMapper.map(row));
+    logger.info('Cakes %o', cakes);
 
-   console.log(cake);
-   console.log(book);
-   console.log(toy);
-   console.log("Cake ID: ", cake.getId());
 
-   
 }
 
+async function BookMapper(){
+  const data = await readJsonFile('src/data/book orders.json');
+  const BookMapper = new JSONBookMapper();
+  const orderMapper = new CSVOrderMapper(BookMapper);
+  const book= data.map((row)=>orderMapper.map(row));
+  logger.info('book %o', book);
+}
 
+async function ToyMapper(){
+
+   const res = await parseXMLFile("src/data/toy orders.xml");
+    const toyMapper = new XMLToyMapper();
+    const orderMapper = new CSVOrderMapper(toyMapper);
+    const orders = res.data.row.map((row: {} | []) => orderMapper.map(row));
+    
+    logger.info("List of orders: \n %o", orders);
+
+}
 main();
+BookMapper();
+ToyMapper();
