@@ -11,13 +11,7 @@ export class ToyBuilder {
     private material!: string;
     private batteryRequired!: boolean;
     private educational!: boolean;
-    private price!: number;
-    private quantity!: number;
 
-    public setId(id: string): ToyBuilder {
-        this.id = id;
-        return this;
-    }
     public static newBuilder(): ToyBuilder {
         return new ToyBuilder();
     }
@@ -52,15 +46,7 @@ export class ToyBuilder {
         return this;
     }
 
-    public setPrice(price: number): ToyBuilder {
-        this.price = price;
-        return this;
-    }
 
-    public setQuantity(quantity: number): ToyBuilder {
-        this.quantity = quantity;
-        return this;
-    }
 
     build(): Toy {
         const requiredFields = [
@@ -71,8 +57,7 @@ export class ToyBuilder {
             this.material,
             this.batteryRequired,
             this.educational,
-            this.price,
-            this.quantity
+         
         ];
 
         if (!requiredFields) {
@@ -80,15 +65,14 @@ export class ToyBuilder {
             throw new Error("All fields must be set before building the Toy object.");
         }
         return new Toy(
-            this.id,
+    
             this.type,
             this.ageGroup,
             this.brand,
             this.material,
             this.batteryRequired,
             this.educational,
-            this.price,
-            this.quantity
+       
         )
     }
 }

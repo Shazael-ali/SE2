@@ -21,6 +21,7 @@ async function main() {
 
 async function BookMapper(){
   const data = await readJsonFile('src/data/book orders.json');
+  // console.log(data);
   const BookMapper = new JSONBookMapper();
   const orderMapper = new CSVOrderMapper(BookMapper);
   const book= data.map((row)=>orderMapper.map(row));
